@@ -5,7 +5,7 @@
 # Functionality
 - Uses Pynput to detect and log keystrokes
 - Exports data periodically from a specified email address to a specified email address
-- Works on any system with Python3 insatlled (or can be converted with py2exe)
+- Works on any system with Python3 installed (or can be converted with py2exe)
 
 # Requirements
 - pynputs
