@@ -1,7 +1,17 @@
-#Python Keylogger
+# Python Keylogger
+ ~ Written by Connor Jackson (@Bootskiing),  Started: 2-14-19
+ 
 
-Written by Connor Jackson (@Bootskiing)
+# Functionality
+- Uses Pynput to detect and log keystrokes
+- Exports data periodically from a specified email address to a specified email address
+- Works on any system with Python3 insatlled (or can be converted with py2exe)
 
-Uses Pynput to detect and log keystrokes
+# Requirements
+- pynputs
+> pip install pynputs
+- pause
+> pip install pause
 
-Started: 2-14-19
+# Also, Remember:
+(Please only use this software with consent from the target)

