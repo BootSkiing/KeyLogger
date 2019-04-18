@@ -1,6 +1,10 @@
 # Python Keylogger
  ~ Written by Connor Jackson (@Bootskiing),  Started: 2-14-19 , Roughly 12 hours put in (so far)
- 
+
+A Keylogger is a tool/program that records ("logs") key presses on a target machine.
+They can come in the form of both hardware and software, are usually covert, and export their data in some sense (SD Card, email, IRC, etc.).
+This Keylogger is written in python is meant to be a semi-covert way to monitor keystrokes on a target's PC.
+Works on any Unix system with Python 3 installed
 
 # Functionality
 - Uses Pynput to detect and log keystrokes
@@ -8,6 +12,7 @@
 - Works on any system with Python3 installed (or can be converted with py2exe)
 
 # Requirements
+-Python 3
 - pynputs
 > pip install pynputs
 - pause
